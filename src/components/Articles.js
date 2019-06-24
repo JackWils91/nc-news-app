@@ -19,8 +19,14 @@ class Articles extends Component {
     });
   }
 
-  componentDidUpdate(preProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
+    const { topic } = this.props;
     // if props have changed, make get request
+    if (prevProps.topic !== topic) {
+      api.getArticles(topic).then(articles => {
+        this.setState({ articles });
+      });
+    }
   }
 }
 

@@ -6,7 +6,9 @@ const NavBar = ({ topics, handleNavBarClick }) => {
   return (
     <nav>
       {topics.map(topic => (
-        <Link to={`/topics/${topic}`}>{topic}</Link>
+        <Link key={topic} to={`/topics/${topic}`}>
+          {topic}
+        </Link>
       ))}
       <p>Logged in as Jess Jelly</p>
     </nav>

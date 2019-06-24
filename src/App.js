@@ -12,8 +12,7 @@ import { Router } from "@reach/router";
 
 class App extends Component {
   state = {
-    topics: ["coding", "football", "cooking"],
-    currentTopic: ""
+    topics: ["coding", "football", "cooking"]
   };
 
   // handleNavBarClick = event => {
@@ -33,10 +32,7 @@ class App extends Component {
         <Router>
           <Articles path="/" />
           <Articles path="/articles" />
-          <Articles
-            path="topics/:topic"
-            // handleNavBarClick={this.handleNavBarClick}
-          />
+          <Articles path="topics/:topic" />
           <ArticleCard path="/comments/:article_id/:article_title" />
         </Router>
       </div>
