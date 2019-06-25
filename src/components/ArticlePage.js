@@ -48,6 +48,7 @@ class ArticlePage extends Component {
   render() {
     const { author, title, body } = this.state.article;
     const { comments, postComment } = this.state;
+    const { username } = this.props;
 
     return (
       <>
@@ -74,9 +75,11 @@ class ArticlePage extends Component {
               {created_at} {author} {votes}
             </p>
             <p>{body}</p>
-            <button onClick={() => this.deleteComment(comment_id)}>
-              Delete!
-            </button>
+            {username === author && (
+              <button onClick={() => this.deleteComment(comment_id)}>
+                Delete!
+              </button>
+            )}
           </React.Fragment>
         ))}
       </>
