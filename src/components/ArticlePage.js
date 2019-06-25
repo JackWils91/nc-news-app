@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as api from "./api";
 import CommentPost from "./CommentPost";
 
-class ArticleCard extends Component {
+class ArticlePage extends Component {
   state = {
     article: {},
     comments: [],
@@ -16,10 +16,8 @@ class ArticleCard extends Component {
     api
       .postComment(article_id, username, postComment)
       .then(({ data }) => {
-        console.log(data.comment.body);
         const { comment } = data;
         this.setState(prevState => {
-          console.log(data.comment.body);
           return {
             comments: [comment, ...prevState.comments],
             postComment: ""
@@ -31,6 +29,20 @@ class ArticleCard extends Component {
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
+  };
+
+  deleteComment = comment_id => {
+    console.log(comment_id);
+    api.deleteComment(comment_id).then(({ data }) => {
+      console.log(data);
+      this.setState(prevState => {
+        return {
+          comments: prevState.comments.filter(
+            comment => comment.comment_id !== comment_id
+          )
+        };
+      });
+    });
   };
 
   render() {
@@ -62,6 +74,9 @@ class ArticleCard extends Component {
               {created_at} {author} {votes}
             </p>
             <p>{body}</p>
+            <button onClick={() => this.deleteComment(comment_id)}>
+              Delete!
+            </button>
           </React.Fragment>
         ))}
       </>
@@ -70,9 +85,9 @@ class ArticleCard extends Component {
   componentDidMount() {
     const { article_id } = this.props;
 
-    let article = api.getArticle(article_id);
+    const article = api.getArticle(article_id);
 
-    let comments = api.getCommentsByArticle(article_id);
+    const comments = api.getCommentsByArticle(article_id);
 
     return Promise.all([article, comments]).then(([article, comments]) => {
       this.setState({ article, comments });
@@ -80,4 +95,4 @@ class ArticleCard extends Component {
   }
 }
 
-export default ArticleCard;
+export default ArticlePage;

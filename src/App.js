@@ -3,7 +3,7 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 //import SortBar from "./components/SortBar";
 import Articles from "./components/Articles";
-import ArticleCard from "./components/ArticleCard";
+import ArticlePage from "./components/ArticlePage";
 //import Topics from "./components/Topics";
 import Header from "./components/Header";
 import { Router } from "@reach/router";
@@ -34,7 +34,7 @@ class App extends Component {
           <Articles path="/" />
           <Articles path="/articles" />
           <Articles path="/topics/:topic" />
-          <ArticleCard
+          <ArticlePage
             path="/comments/:article_id/:article_title"
             username={username}
           />
