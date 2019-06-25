@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import * as api from "./api";
 import CommentPost from "./CommentPost";
+import Error from "./Error";
 
 class ArticlePage extends Component {
   state = {
     article: {},
     comments: [],
-    postComment: ""
+    postComment: "",
+    error: null,
+    isLoading: true
   };
 
   handleSubmit = event => {
@@ -32,9 +35,7 @@ class ArticlePage extends Component {
   };
 
   deleteComment = comment_id => {
-    console.log(comment_id);
     api.deleteComment(comment_id).then(({ data }) => {
-      console.log(data);
       this.setState(prevState => {
         return {
           comments: prevState.comments.filter(
@@ -47,8 +48,10 @@ class ArticlePage extends Component {
 
   render() {
     const { author, title, body } = this.state.article;
-    const { comments, postComment } = this.state;
+    const { comments, postComment, error, isLoading } = this.state;
     const { username } = this.props;
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <Error error={error} />;
 
     return (
       <>
@@ -92,9 +95,14 @@ class ArticlePage extends Component {
 
     const comments = api.getCommentsByArticle(article_id);
 
-    return Promise.all([article, comments]).then(([article, comments]) => {
-      this.setState({ article, comments });
-    });
+    return Promise.all([article, comments])
+      .then(([article, comments]) => {
+        this.setState({ article, comments, isLoading: false, error: null });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: err, isLoading: false });
+      });
   }
 }
 
