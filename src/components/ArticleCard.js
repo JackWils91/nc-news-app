@@ -21,7 +21,8 @@ class ArticleCard extends Component {
         this.setState(prevState => {
           console.log(data.comment.body);
           return {
-            comments: [comment, ...prevState.comments]
+            comments: [comment, ...prevState.comments],
+            postComment: ""
           };
         });
       })
@@ -34,7 +35,7 @@ class ArticleCard extends Component {
 
   render() {
     const { author, title, body } = this.state.article;
-    const { comments } = this.state;
+    const { comments, postComment } = this.state;
 
     return (
       <>
@@ -46,7 +47,11 @@ class ArticleCard extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <label>Comment: </label>{" "}
-          <input onChange={this.handleChange} name={"postComment"} />
+          <input
+            onChange={this.handleChange}
+            name={"postComment"}
+            value={postComment}
+          />
           <button>Submit</button>
         </form>
 
