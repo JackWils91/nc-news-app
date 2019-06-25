@@ -1,33 +1,58 @@
 import React, { Component } from "react";
 import * as api from "./api";
-console.log(api);
+import { Link } from "@reach/router";
+import Error from "./Error";
 
 class Articles extends Component {
   state = {
-    articles: []
+    articles: [],
+    error: null,
+    isLoading: true
   };
 
   render() {
-    const { articles } = this.state;
-    return <div>{articles.map(article => article.title)}</div>;
+    const { articles, error, isLoading } = this.state;
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <Error error={error} />;
+
+    return (
+      <div>
+        {articles.map(article => (
+          <Link
+            key={article.article_id}
+            to={`/comments/${article.article_id}/${article.title}`}
+          >
+            {article.title}
+          </Link>
+        ))}
+      </div>
+    );
   }
 
   componentDidMount() {
-    const { topic, author } = this.props;
-    api.getArticles(topic).then(articles => {
-      this.setState({ articles });
-    });
+    this.fetchArticles();
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { topic } = this.props;
     // if props have changed, make get request
     if (prevProps.topic !== topic) {
-      api.getArticles(topic).then(articles => {
-        this.setState({ articles });
-      });
+      this.fetchArticles();
     }
   }
+
+  fetchArticles = () => {
+    const { topic } = this.props;
+    api
+      .getArticles(topic)
+      .then(articles => {
+        this.setState({ articles, isLoading: false, error: null });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: err, isLoading: false });
+      });
+  };
 }
 
 export default Articles;

@@ -6,15 +6,38 @@ const request = axios.create({
 
 //always remember to return your axio srequest
 
-export const getArticles = (topic, author) => {
+export const getArticles = topic => {
   return request
     .get("/articles", {
       params: {
-        topic: topic,
-        author: author
+        topic: topic
       }
     })
     .then(({ data }) => {
       return data.articles;
     });
+};
+
+export const getArticle = article_id => {
+  return request.get(`/articles/${article_id}`).then(({ data }) => {
+    return data.article;
+  });
+};
+
+export const getCommentsByArticle = article_id => {
+  return request
+    .get(`/articles/${article_id}/comments`, {
+      params: {}
+    })
+    .then(({ data }) => {
+      console.log(data);
+      return data.comments;
+    });
+};
+
+export const postComment = (article_id, username, postComment) => {
+  return request.post(`/articles/${article_id}/comments`, {
+    username: username,
+    body: postComment
+  });
 };

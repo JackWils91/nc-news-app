@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "@reach/router";
 
-const NavBar = ({ topics, handleNavBarClick }) => {
+const NavBar = ({ topics, username }) => {
   return (
     <nav>
       {topics.map(topic => (
@@ -10,7 +10,7 @@ const NavBar = ({ topics, handleNavBarClick }) => {
           {topic}
         </Link>
       ))}
-      <p>Logged in as Jess Jelly</p>
+      <p>Logged in as {username}</p>
     </nav>
   );
 };
