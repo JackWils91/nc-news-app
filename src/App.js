@@ -8,11 +8,12 @@ import ArticlePage from "./components/ArticlePage";
 import Header from "./components/Header";
 import { Router } from "@reach/router";
 import Error from "./components/Error";
+import * as api from "./components/api";
 
 class App extends Component {
   state = {
     username: "jessjelly",
-    topics: ["coding", "football", "cooking"],
+    topics: [],
     sort_by: "created_at",
     order: "ascending",
     authors: []
@@ -82,6 +83,22 @@ class App extends Component {
       </div>
     );
   }
+  componentDidMount() {
+    this.fetchTopics();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { topics } = this.state;
+    if (prevState.topics !== topics) {
+      this.fetchTopics();
+    }
+  }
+  fetchTopics = () => {
+    api.getTopics().then(topics => {
+      const topicArray = topics.map(topic => topic.slug);
+      this.setState({ topics: topicArray });
+    });
+  };
 }
 
 export default App;
