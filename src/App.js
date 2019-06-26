@@ -15,7 +15,7 @@ class App extends Component {
   state = {
     username: "jessjelly",
     topics: ["coding", "football", "cooking"],
-    sort_by: "votes"
+    sort_by: "created_at"
   };
 
   // handleNavBarClick = event => {

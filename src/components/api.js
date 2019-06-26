@@ -46,3 +46,11 @@ export const postComment = (article_id, username, postComment) => {
 export const deleteComment = comment_id => {
   return request.delete(`/comments/${comment_id}`);
 };
+
+export const patchArticleVotes = (id, increment, type) => {
+  return request
+    .patch(`/${type}s/${id}`, { inc_votes: increment })
+    .then(({ data }) => {
+      return data[type];
+    });
+};

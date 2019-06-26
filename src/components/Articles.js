@@ -35,7 +35,7 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { topic, sort_by } = this.props;
-    // if props have changed, make get request
+    // if props have changed, make get request - can set the two below into 2 different constant and then do if(topic || sort-by)
     if ((prevProps.topic !== topic) | (prevProps.sort_by !== sort_by)) {
       this.fetchArticles();
     }

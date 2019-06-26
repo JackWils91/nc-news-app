@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "./api";
 import CommentPost from "./CommentPost";
 import Error from "./Error";
+import Voter from "./Voter";
 
 class ArticlePage extends Component {
   state = {
@@ -47,7 +48,7 @@ class ArticlePage extends Component {
   };
 
   render() {
-    const { author, title, body } = this.state.article;
+    const { author, title, body, votes, article_id } = this.state.article;
     const { comments, postComment, error, isLoading } = this.state;
     const { username } = this.props;
     if (isLoading) return <p>Loading...</p>;
@@ -58,9 +59,10 @@ class ArticlePage extends Component {
         <p>{author}</p>
         <p>{title}</p>
         <p>{body}</p>
-        <div />
+        <Voter votes={votes} id={article_id} type="article" />
         <div />
 
+        <div />
         <form onSubmit={this.handleSubmit}>
           <label>Comment: </label>{" "}
           <input
@@ -70,7 +72,6 @@ class ArticlePage extends Component {
           />
           <button>Submit</button>
         </form>
-
         <CommentPost />
         {comments.map(({ author, created_at, body, votes, comment_id }) => (
           <React.Fragment key={comment_id}>
@@ -83,11 +84,15 @@ class ArticlePage extends Component {
                 Delete!
               </button>
             )}
+            <Voter votes={votes} id={comment_id} type="comment" />
           </React.Fragment>
         ))}
+
+        {/* <p>Comments={comment_count}</p> */}
       </>
     );
   }
+
   componentDidMount() {
     const { article_id } = this.props;
 
