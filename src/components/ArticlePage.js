@@ -84,7 +84,10 @@ class ArticlePage extends Component {
                 Delete!
               </button>
             )}
-            <Voter votes={votes} id={comment_id} type="comment" />
+
+            {username !== author && (
+              <Voter votes={votes} id={comment_id} type="comment" />
+            )}
           </React.Fragment>
         ))}
 
