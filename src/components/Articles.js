@@ -34,17 +34,17 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { topic } = this.props;
+    const { topic, sort_by } = this.props;
     // if props have changed, make get request
-    if (prevProps.topic !== topic) {
+    if ((prevProps.topic !== topic) | (prevProps.sort_by !== sort_by)) {
       this.fetchArticles();
     }
   }
 
   fetchArticles = () => {
-    const { topic } = this.props;
+    const { topic, sort_by } = this.props;
     api
-      .getArticles(topic)
+      .getArticles(topic, sort_by)
       .then(articles => {
         this.setState({ articles, isLoading: false, error: null });
       })

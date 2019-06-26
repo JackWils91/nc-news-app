@@ -14,7 +14,8 @@ import Error from "./components/Error";
 class App extends Component {
   state = {
     username: "jessjelly",
-    topics: ["coding", "football", "cooking"]
+    topics: ["coding", "football", "cooking"],
+    sort_by: "votes"
   };
 
   // handleNavBarClick = event => {
@@ -22,18 +23,25 @@ class App extends Component {
 
   //   this.setState({ currentTopic: value });
   // };
+  updateSorting = sort_by => {
+    this.setState({ sort_by });
+  };
 
   render() {
-    const { topics, username } = this.state;
+    const { topics, username, sort_by } = this.state;
 
     return (
       <div className="App">
         <Header />
-        <NavBar topics={topics} username={username} />
+        <NavBar
+          topics={topics}
+          username={username}
+          updateSorting={this.updateSorting}
+        />
         <Router>
-          <Articles path="/" />
-          <Articles path="/articles" />
-          <Articles path="/topics/:topic" />
+          <Articles path="/" sort_by={sort_by} />
+          <Articles path="/articles" sort_by={sort_by} />
+          <Articles path="/topics/:topic" sort_by={sort_by} />
           <ArticlePage
             path="/comments/:article_id/:article_title"
             username={username}

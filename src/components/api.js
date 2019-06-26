@@ -6,11 +6,12 @@ const request = axios.create({
 
 //always remember to return your axio srequest
 
-export const getArticles = topic => {
+export const getArticles = (topic, sort_by) => {
   return request
     .get("/articles", {
       params: {
-        topic: topic
+        topic: topic,
+        sort_by: sort_by
       }
     })
     .then(({ data }) => {
