@@ -67,6 +67,7 @@ class App extends Component {
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
             getAuthors={this.getAuthors}
+            topics={true}
           />
           {/* <Articles
             path="/authors/:author"
@@ -87,12 +88,12 @@ class App extends Component {
     this.fetchTopics();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { topics } = this.state;
-    if (prevState.topics !== topics) {
-      this.fetchTopics();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   const { topics } = this.state;
+  //   if (prevState.topics !== topics) {
+  //     this.fetchTopics();
+  //   }
+  // }
   fetchTopics = () => {
     api.getTopics().then(topics => {
       const topicArray = topics.map(topic => topic.slug);

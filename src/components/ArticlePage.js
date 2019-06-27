@@ -17,18 +17,20 @@ class ArticlePage extends Component {
     event.preventDefault();
     const { postComment } = this.state;
     const { article_id, username } = this.props;
-    api
-      .postComment(article_id, username, postComment)
-      .then(({ data }) => {
-        const { comment } = data;
-        this.setState(prevState => {
-          return {
-            comments: [comment, ...prevState.comments],
-            postComment: ""
-          };
-        });
-      })
-      .catch(err => console.log(err));
+    if (postComment) {
+      api
+        .postComment(article_id, username, postComment)
+        .then(({ data }) => {
+          const { comment } = data;
+          this.setState(prevState => {
+            return {
+              comments: [comment, ...prevState.comments],
+              postComment: ""
+            };
+          });
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   handleChange = event => {

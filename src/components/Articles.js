@@ -13,8 +13,9 @@ class Articles extends Component {
 
   render() {
     const { articles, error, isLoading } = this.state;
-    const { updateSorting, updateOrder } = this.props;
+    const { updateSorting, updateOrder, topics } = this.props;
     if (isLoading) return <p>Loading...</p>;
+    if (error && topics) return <Error />;
     if (error) return <Error error={error} />;
 
     return (
