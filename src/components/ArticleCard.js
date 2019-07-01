@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import { Link } from "@reach/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { distanceInWords } from "date-fns";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -10,7 +11,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ArticleCard = ({ article_id, title, body, author, votes }) => {
+const ArticleCard = ({
+  article_id,
+  title,
+  body,
+  author,
+  votes,
+  created_at
+}) => {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
@@ -22,6 +30,9 @@ const ArticleCard = ({ article_id, title, body, author, votes }) => {
       <Typography component="p">{`${body.substr(0, 125)}...`}</Typography>
       <Typography component="p">Author: {author}</Typography>
       <Typography component="p">Votes: {votes}</Typography>
+      <Typography component="p">
+        Created {distanceInWords(created_at, new Date())} ago
+      </Typography>
     </Paper>
   );
 };
