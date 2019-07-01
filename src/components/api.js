@@ -55,7 +55,7 @@ export const deleteComment = comment_id => {
   return request.delete(`/comments/${comment_id}`);
 };
 
-export const patchArticleVotes = (id, increment, type) => {
+export const patchVotes = (id, increment, type) => {
   return request
     .patch(`/${type}s/${id}`, { inc_votes: increment })
     .then(({ data }) => {

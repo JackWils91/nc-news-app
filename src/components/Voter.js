@@ -38,7 +38,7 @@ class Voter extends Component {
     this.setState(prevState => ({
       voteChange: prevState.voteChange + increment
     }));
-    api.patchArticleVotes(id, increment, type).catch(err => {
+    api.patchVotes(id, increment, type).catch(err => {
       this.setState(prevState => ({
         voteChange: prevState.voteChange - increment
       }));
