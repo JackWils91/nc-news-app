@@ -41,7 +41,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header />
+        {/* <Header /> */}
         <NavBar topics={topics} username={username} authors={authors} />
         <Router>
           <Articles

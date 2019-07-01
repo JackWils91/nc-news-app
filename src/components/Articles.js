@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import * as api from "./api";
-import { Link } from "@reach/router";
 import Error from "./Error";
 import SortBar from "./SortBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import ArticleCard from "./ArticleCard";
 
 class Articles extends Component {
   state = {
@@ -12,6 +14,7 @@ class Articles extends Component {
   };
 
   render() {
+    //const classes = useStyles();
     const { articles, error, isLoading } = this.state;
     const { updateSorting, updateOrder, topics } = this.props;
     if (isLoading) return <p>Loading...</p>;
@@ -21,14 +24,14 @@ class Articles extends Component {
     return (
       <div>
         <SortBar updateSorting={updateSorting} updateOrder={updateOrder} />
-        {articles.map(article => (
-          <Link
-            key={article.article_id}
-            to={`/comments/${article.article_id}/${article.title}`}
-          >
-            {article.title}
-          </Link>
-        ))}
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth="sm md">
+            {articles.map(article => (
+              <ArticleCard {...article} />
+            ))}
+          </Container>
+        </React.Fragment>
       </div>
     );
   }

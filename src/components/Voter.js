@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import * as api from "./api";
+import { blue, red } from "@material-ui/core/colors";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import IconButton from "@material-ui/core/IconButton";
 
 class Voter extends Component {
   state = {
@@ -10,13 +14,22 @@ class Voter extends Component {
     const { voteChange } = this.state;
     return (
       <>
-        <button onClick={() => this.handleVote(1)} disabled={voteChange > 0}>
-          Vote up
-        </button>
+        <IconButton
+          color="primary"
+          onClick={() => this.handleVote(1)}
+          disabled={voteChange > 0}
+        >
+          <ThumbUpIcon />
+        </IconButton>
+
         <p>Votes: {votes + voteChange}</p>
-        <button onClick={() => this.handleVote(-1)} disabled={voteChange < 0}>
-          Vote down
-        </button>
+        <IconButton
+          color="secondary"
+          onClick={() => this.handleVote(-1)}
+          disabled={voteChange < 0}
+        >
+          <ThumbDownIcon />
+        </IconButton>
       </>
     );
   }
