@@ -18,9 +18,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const referenceTable = reference => {
+  const table = {
+    "Created At": "created_at",
+    "Comment Count": "comment_count",
+    Votes: "votes",
+    "A-Z": "asc",
+    "Z-A": "desc"
+  };
+
+  return table[reference];
+};
+
 const SortBar = ({ updateSorting, updateOrder }) => {
-  const listOfQueries = ["created_at", "comment_count", "votes"];
-  const ascendingOrDescending = ["asc", "desc"];
+  const listOfQueries = ["Created At", "Comment Count", "Votes"];
+  const ascendingOrDescending = ["A-Z", "Z-A"];
   const classes = useStyles();
 
   return (
@@ -30,7 +42,7 @@ const SortBar = ({ updateSorting, updateOrder }) => {
         <Select
           native
           onChange={event => {
-            updateSorting(event.target.value);
+            updateSorting(referenceTable(event.target.value));
           }}
         >
           {listOfQueries.map(query => {
@@ -45,7 +57,7 @@ const SortBar = ({ updateSorting, updateOrder }) => {
           variant="filled"
           className={classes.formControl}
           onChange={event => {
-            updateOrder(event.target.value);
+            updateOrder(referenceTable(event.target.value));
           }}
         >
           {ascendingOrDescending.map(query => {
