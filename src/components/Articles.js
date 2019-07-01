@@ -16,7 +16,7 @@ class Articles extends Component {
   render() {
     //const classes = useStyles();
     const { articles, error, isLoading } = this.state;
-    const { updateSorting, updateOrder, topics } = this.props;
+    const { updateSorting, updateOrder, topics, username } = this.props;
     if (isLoading) return <p>Loading...</p>;
     if (error && topics) return <Error />;
     if (error) return <Error error={error} />;
@@ -28,7 +28,7 @@ class Articles extends Component {
           <CssBaseline />
           <Container maxWidth="sm md">
             {articles.map(article => (
-              <ArticleCard {...article} />
+              <ArticleCard {...article} username={username} />
             ))}
           </Container>
         </React.Fragment>

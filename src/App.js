@@ -51,6 +51,7 @@ class App extends Component {
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
             getAuthors={this.getAuthors}
+            username={username}
           />
           <Articles
             path="/articles"
@@ -59,6 +60,7 @@ class App extends Component {
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
             getAuthors={this.getAuthors}
+            username={username}
           />
           <Articles
             path="/topics/:topic"
@@ -68,6 +70,7 @@ class App extends Component {
             updateOrder={this.updateOrder}
             getAuthors={this.getAuthors}
             topics={true}
+            username={username}
           />
           {/* <Articles
             path="/authors/:author"
