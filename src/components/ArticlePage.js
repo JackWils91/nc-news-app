@@ -58,7 +58,14 @@ class ArticlePage extends Component {
   };
 
   render() {
-    const { author, title, body, votes, article_id } = this.state.article;
+    const {
+      author,
+      title,
+      body,
+      votes,
+      article_id,
+      created_at
+    } = this.state.article;
     const { comments, postComment, error, isLoading } = this.state;
     const { username } = this.props;
     if (isLoading) return <p>Loading...</p>;
@@ -68,8 +75,16 @@ class ArticlePage extends Component {
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="sm md">
-          <ArticlePageArticle author={author} title={title} body={body} />
-          <Voter votes={votes} id={article_id} type="article" />
+          <ArticlePageArticle
+            author={author}
+            title={title}
+            body={body}
+            votes={votes}
+            id={article_id}
+            username={username}
+            created_at={created_at}
+          />
+          {/* <Voter /> */}
           {/* <p>Comments={comment_count}</p> */}
 
           <form onSubmit={this.handleSubmit}>
@@ -78,7 +93,7 @@ class ArticlePage extends Component {
               name={"postComment"}
               value={postComment}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Add Comment</Button>
           </form>
           <CommentPost />
           {comments.map(comment => (
