@@ -1,29 +1,59 @@
 import React from "react";
 
-import { Link } from "@reach/router";
+import { Link as RouterLink } from "@reach/router";
+import Link from "@material-ui/core/Link";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { useStyles } from "../css";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import HomeIcon from "@material-ui/icons/Home";
+import IconButton from "@material-ui/core/IconButton";
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1)
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1)
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1)
+  },
+  iconSmall: {
+    fontSize: 20
+  },
+  color: {
+    color: "inherit",
+    boxShadow: "none",
+    textDecoration: "inherit"
+  }
+}));
 
 const NavBar = ({ topics, username, authors }) => {
   const classes = useStyles();
-  console.log(useStyles);
 
   return (
-    <div>
+    <div className={classes.color}>
       <AppBar position="static">
-        <Grid container justify="space-between" alignItems="center">
-          <Toolbar>
+        <Grid container justify="space-between" alignItems="left">
+          <Grid item xs={4}>
+            {/* <Toolbar> */}
+            <Link component={RouterLink} to={`/`} color="inherit">
+              <IconButton color="inherit" className={classes.leftIcon}>
+                <HomeIcon /> NC NEWS APP
+              </IconButton>
+            </Link>
+          </Grid>
+          <Grid item xs={4}>
             <Typography color="inherit">
-              <h1>NC NEWS APP</h1>
               {topics.map(topic => (
-                <Button>
+                <Button color="inherit">
                   <Link
+                    component={RouterLink}
+                    color="inherit"
                     className="text"
-                    // className={classes}
                     key={topic}
                     to={`/topics/${topic}`}
                   >
@@ -31,9 +61,14 @@ const NavBar = ({ topics, username, authors }) => {
                   </Link>
                 </Button>
               ))}
+            </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Typography color="inherit">
               <p>Logged in as {username}</p>
             </Typography>
-          </Toolbar>
+            {/* </Toolbar> */}
+          </Grid>
         </Grid>
       </AppBar>
 

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(2),
     margin: "auto",
-    maxWidth: 500
+    maxWidth: 700
   }
 }));
 
@@ -34,59 +34,66 @@ const ArticleCard = ({
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper}>
-      <Grid container spacing={2}>
-        <Grid item>
-          {username !== author && (
-            <Voter votes={votes} id={article_id} type="article" />
-          )}
-          {username === author && (
-            <>
-              <IconButton>
-                <ThumbUpIcon />
-              </IconButton>
+    <div className={classes.root}>
+      <React.Fragment key={article_id}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              {username !== author && (
+                <Voter votes={votes} id={article_id} type="article" />
+              )}
+              {username === author && (
+                <>
+                  <IconButton>
+                    <ThumbUpIcon />
+                  </IconButton>
 
-              <p>Votes: {votes}</p>
-              <IconButton>
-                <ThumbDownIcon />
-              </IconButton>
-            </>
-          )}
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1">
-                <Link key={article_id} to={`/comments/${article_id}/${title}`}>
-                  {title}
-                </Link>
-              </Typography>
+                  <p>Votes: {votes}</p>
+                  <IconButton>
+                    <ThumbDownIcon />
+                  </IconButton>
+                </>
+              )}
             </Grid>
-            <Grid item>
-              <Typography variant="body2" gutterBottom>
-                {`${body.substr(0, 125)}...`}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" color="textSecondary">
-                Created {distanceInWords(created_at, new Date())} ago
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body2" color="textSecondary">
-                Author: {author}
-              </Typography>
-            </Grid>
-            {/* <Typography component="p">{`${body.substr(0, 125)}...`}</Typography> */}
-            {/* <Typography component="p">Author: {author}</Typography>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="subtitle1">
+                    <Link
+                      key={article_id}
+                      to={`/comments/${article_id}/${title}`}
+                    >
+                      {title}
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2" gutterBottom>
+                    {`${body.substr(0, 125)}...`}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2" color="textSecondary">
+                    Created {distanceInWords(created_at, new Date())} ago
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body2" color="textSecondary">
+                    Author: {author}
+                  </Typography>
+                </Grid>
+                {/* <Typography component="p">{`${body.substr(0, 125)}...`}</Typography> */}
+                {/* <Typography component="p">Author: {author}</Typography>
       <Typography component="p">Votes: {votes}</Typography>
       <Typography component="p">
         Created {distanceInWords(created_at, new Date())} ago
       </Typography> */}
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
+        </Paper>
+      </React.Fragment>
+    </div>
   );
 };
 
