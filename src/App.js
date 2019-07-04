@@ -5,7 +5,6 @@ import NavBar from "./components/NavBar";
 import Articles from "./components/Articles";
 import ArticlePage from "./components/ArticlePage";
 
-import Header from "./components/Header";
 import { Router } from "@reach/router";
 import Error from "./components/Error";
 import * as api from "./components/api";
@@ -15,8 +14,7 @@ class App extends Component {
     username: "jessjelly",
     topics: [],
     sort_by: "created_at",
-    order: "ascending",
-    authors: []
+    order: "ascending"
   };
 
   updateSorting = sort_by => {
@@ -27,20 +25,11 @@ class App extends Component {
     this.setState({ order });
   };
 
-  getAuthors = articles => {
-    const authorMap = articles.map(article => article.author);
-    const authors = [...new Set(authorMap)];
-    this.setState(prevState => {
-      return { authors: [...prevState.authors, authors] };
-    });
-  };
-
   render() {
     const { topics, username, sort_by, authors, order } = this.state;
 
     return (
       <div className="App">
-        {/* <Header /> */}
         <NavBar topics={topics} username={username} authors={authors} />
         <Router>
           <Articles
@@ -49,7 +38,6 @@ class App extends Component {
             order={order}
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
-            getAuthors={this.getAuthors}
             username={username}
           />
           <Articles
@@ -58,7 +46,6 @@ class App extends Component {
             order={order}
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
-            getAuthors={this.getAuthors}
             username={username}
           />
           <Articles
@@ -67,16 +54,10 @@ class App extends Component {
             order={order}
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
-            getAuthors={this.getAuthors}
             topics={true}
             username={username}
           />
-          {/* <Articles
-            path="/authors/:author"
-            sort_by={sort_by}
-            updateSorting={this.updateSorting}
-            getAuthors={this.getAuthors}
-          /> */}
+
           <ArticlePage
             path="/comments/:article_id/:article_title"
             username={username}
@@ -90,12 +71,6 @@ class App extends Component {
     this.fetchTopics();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { topics } = this.state;
-  //   if (prevState.topics !== topics) {
-  //     this.fetchTopics();
-  //   }
-  // }
   fetchTopics = () => {
     api.getTopics().then(topics => {
       const topicArray = topics.map(topic => topic.slug);

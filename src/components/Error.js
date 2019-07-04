@@ -1,7 +1,5 @@
 import React from "react";
 
-//may be message or msg
-
 const Error = ({ error }) => {
   return (
     <div>

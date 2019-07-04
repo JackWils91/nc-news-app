@@ -59,7 +59,7 @@ class Articles extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { topic, sort_by, author, order } = this.props;
     const { page } = this.state;
-    // if props have changed, make get request - can set the two below into 2 different constant and then do if(topic || sort-by)
+
     if (
       prevProps.topic !== topic ||
       prevProps.sort_by !== sort_by ||
@@ -72,13 +72,12 @@ class Articles extends Component {
   }
 
   fetchArticles = () => {
-    const { topic, sort_by, getAuthors, author, order } = this.props;
+    const { topic, sort_by, author, order } = this.props;
     const { page } = this.state;
     api
       .getArticles(topic, sort_by, author, order, page)
       .then(({ articles, total_count }) => {
         this.setState({ articles, total_count, isLoading: false, error: null });
-        getAuthors(articles);
       })
       .catch(err => {
         console.log(err);

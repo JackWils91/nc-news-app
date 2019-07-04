@@ -4,8 +4,6 @@ const request = axios.create({
   baseURL: "https://nc-news-jack-wilson.herokuapp.com/api"
 });
 
-//always remember to return your axio srequest
-
 export const getArticles = (topic, sort_by, author, order, page) => {
   return request
     .get("/articles", {
