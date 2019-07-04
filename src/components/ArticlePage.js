@@ -33,7 +33,8 @@ class ArticlePage extends Component {
           this.setState(prevState => {
             return {
               comments: [comment, ...prevState.comments],
-              postComment: ""
+              postComment: "",
+              disable: false
             };
           });
         })
@@ -42,7 +43,8 @@ class ArticlePage extends Component {
   };
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    const { value, name } = event.target;
+    this.setState({ [name]: value });
   };
 
   deleteComment = comment_id => {
@@ -68,6 +70,7 @@ class ArticlePage extends Component {
     } = this.state.article;
     const { comments, postComment, error, isLoading } = this.state;
     const { username } = this.props;
+    const disabled = postComment.length;
     if (isLoading) return <p>Loading...</p>;
     if (error) return <Error error={error} />;
 
@@ -84,16 +87,17 @@ class ArticlePage extends Component {
             username={username}
             created_at={created_at}
           />
-          {/* <Voter /> */}
-          {/* <p>Comments={comment_count}</p> */}
 
           <form onSubmit={this.handleSubmit}>
             <TextField
               onChange={this.handleChange}
               name={"postComment"}
               value={postComment}
+              placeholder="Add Comment..."
             />
-            <Button type="submit">Add Comment</Button>
+            <Button type="submit" disabled={disabled < 1}>
+              Comment
+            </Button>
           </form>
           <CommentPost />
           {comments.map(comment => (

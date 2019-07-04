@@ -82,12 +82,6 @@ const ArticleCard = ({
                     Author: {author}
                   </Typography>
                 </Grid>
-                {/* <Typography component="p">{`${body.substr(0, 125)}...`}</Typography> */}
-                {/* <Typography component="p">Author: {author}</Typography>
-      <Typography component="p">Votes: {votes}</Typography>
-      <Typography component="p">
-        Created {distanceInWords(created_at, new Date())} ago
-      </Typography> */}
               </Grid>
             </Grid>
           </Grid>
