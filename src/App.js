@@ -28,7 +28,6 @@ class App extends Component {
   };
 
   getAuthors = articles => {
-    console.log(articles);
     const authorMap = articles.map(article => article.author);
     const authors = [...new Set(authorMap)];
     this.setState(prevState => {

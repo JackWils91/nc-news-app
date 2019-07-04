@@ -40,7 +40,6 @@ export const getCommentsByArticle = article_id => {
       params: {}
     })
     .then(({ data }) => {
-      console.log(data);
       return data.comments;
     });
 };
