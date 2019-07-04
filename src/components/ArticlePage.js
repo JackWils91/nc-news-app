@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import * as api from "./api";
-import CommentPost from "./CommentPost";
+
 import Error from "./Error";
-import Voter from "./Voter";
+
 import Button from "@material-ui/core/Button";
 
 import ArticlePageArticle from "./ArticlePageArticle";
@@ -99,7 +99,6 @@ class ArticlePage extends Component {
               Comment
             </Button>
           </form>
-          <CommentPost />
           {comments.map(comment => (
             <ArticlePageComments
               {...comment}
