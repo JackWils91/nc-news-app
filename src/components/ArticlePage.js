@@ -77,7 +77,7 @@ class ArticlePage extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="sm md">
+        <Container maxWidth="lg">
           <ArticlePageArticle
             author={author}
             title={title}
@@ -102,6 +102,7 @@ class ArticlePage extends Component {
           {comments.map(comment => (
             <ArticlePageComments
               {...comment}
+              key={comment.comment_id}
               username={username}
               deleteComment={this.deleteComment}
             />

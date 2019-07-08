@@ -30,9 +30,13 @@ class Articles extends Component {
         <SortBar updateSorting={updateSorting} updateOrder={updateOrder} />
         <React.Fragment>
           <CssBaseline />
-          <Container maxWidth="sm md">
+          <Container maxWidth="md">
             {articles.map(article => (
-              <ArticleCard {...article} username={username} />
+              <ArticleCard
+                {...article}
+                username={username}
+                key={article.article_id}
+              />
             ))}
             <Button onClick={() => this.handlePage(-1)} disabled={page === 1}>
               Previous

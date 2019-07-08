@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "./api";
-//import { blue, red } from "@material-ui/core/colors";
+
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import IconButton from "@material-ui/core/IconButton";

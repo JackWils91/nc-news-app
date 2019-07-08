@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const NavBar = ({ topics, username, authors }) => {
+const NavBar = ({ topics, username }) => {
   const classes = useStyles();
 
   return (
@@ -49,7 +49,7 @@ const NavBar = ({ topics, username, authors }) => {
             <Box textAlign="center" m={1}>
               <Typography color="inherit">
                 {topics.map(topic => (
-                  <Button color="inherit">
+                  <Button key={topic} color="inherit">
                     <Link
                       component={RouterLink}
                       color="inherit"
