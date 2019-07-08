@@ -80,7 +80,6 @@ class Articles extends Component {
         this.setState({ articles, total_count, isLoading: false, error: null });
       })
       .catch(err => {
-        console.log(err);
         this.setState({ error: err, isLoading: false });
       });
   };

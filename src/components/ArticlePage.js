@@ -123,7 +123,6 @@ class ArticlePage extends Component {
         this.setState({ article, comments, isLoading: false, error: null });
       })
       .catch(err => {
-        console.log(err);
         this.setState({ error: err, isLoading: false });
       });
   }

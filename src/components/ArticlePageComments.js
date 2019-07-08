@@ -1,5 +1,5 @@
 import React from "react";
-import { blue, red } from "@material-ui/core/colors";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import Voter from "./Voter";
@@ -88,17 +88,6 @@ const ArticlePageComments = ({
               </Grid>
             </Grid>
           </Grid>
-          {/* </Grid>
-        <Paper className={classes.root}>
-          <Typography component="p">
-            
-          </Typography>
-          <Typography component="p"></Typography> */}
-          {/*   
-        <p>
-          {created_at} {author} {votes}
-        </p>
-        <p>{body}</p> */}
         </Paper>
       </React.Fragment>
     </div>

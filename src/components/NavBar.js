@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import HomeIcon from "@material-ui/icons/Home";
 import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -36,9 +37,8 @@ const NavBar = ({ topics, username, authors }) => {
   return (
     <div className={classes.color}>
       <AppBar position="static">
-        <Grid container justify="space-between" alignItems="left">
+        <Grid container justify="space-between">
           <Grid item xs={4}>
-            {/* <Toolbar> */}
             <Link component={RouterLink} to={`/`} color="inherit">
               <IconButton color="inherit" className={classes.leftIcon}>
                 <HomeIcon /> NC NEWS APP
@@ -46,36 +46,31 @@ const NavBar = ({ topics, username, authors }) => {
             </Link>
           </Grid>
           <Grid item xs={4}>
-            <Typography color="inherit">
-              {topics.map(topic => (
-                <Button color="inherit">
-                  <Link
-                    component={RouterLink}
-                    color="inherit"
-                    className="text"
-                    key={topic}
-                    to={`/topics/${topic}`}
-                  >
-                    {topic}
-                  </Link>
-                </Button>
-              ))}
-            </Typography>
+            <Box textAlign="center" m={1}>
+              <Typography color="inherit">
+                {topics.map(topic => (
+                  <Button color="inherit">
+                    <Link
+                      component={RouterLink}
+                      color="inherit"
+                      className="text"
+                      key={topic}
+                      to={`/topics/${topic}`}
+                    >
+                      {topic}
+                    </Link>
+                  </Button>
+                ))}
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={4}>
-            <Typography color="inherit">
-              <p>Logged in as {username}</p>
-            </Typography>
-            {/* </Toolbar> */}
+            <Box textAlign="center" m={1}>
+              <Typography color="inherit">Logged in as {username}</Typography>
+            </Box>
           </Grid>
         </Grid>
       </AppBar>
-
-      {/* {authors.map(author => (
-        <Link key={author} to={`/authors/${author}`}>
-          {author}
-        </Link>
-      ))} */}
     </div>
   );
 };
