@@ -54,7 +54,6 @@ class App extends Component {
             order={order}
             updateSorting={this.updateSorting}
             updateOrder={this.updateOrder}
-            topics={true}
             username={username}
           />
 

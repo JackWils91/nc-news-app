@@ -38,7 +38,7 @@ class ArticlePage extends Component {
             };
           });
         })
-        .catch(err => console.log(err));
+        .catch(err => this.setState({ error: err, isLoading: false }));
     }
   };
 

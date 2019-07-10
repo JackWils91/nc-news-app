@@ -19,10 +19,9 @@ class Articles extends Component {
 
   render() {
     const { articles, error, isLoading, page, total_count } = this.state;
-    const { updateSorting, updateOrder, topics, username } = this.props;
+    const { updateSorting, updateOrder, username } = this.props;
     const disabled = Math.ceil(total_count / 10) === page;
     if (isLoading) return <p>Loading...</p>;
-    if (error && topics) return <Error />;
     if (error) return <Error error={error} />;
 
     return (
